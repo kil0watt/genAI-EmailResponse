@@ -6,4 +6,4 @@ pip install hugchat `
 
 to view this Streamlit app on a browser, run it with the following command:
 
-    streamlit run main.py [ARGUMENTS]
+    streamlit run emailAssistant.py [ARGUMENTS]
