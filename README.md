@@ -6,7 +6,7 @@ https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-e
 Get the credentials from AWS Bedrock lab and add in terminal 
 (https://catalog.us-east-1.prod.workshops.aws/event/dashboard/en-US)
 
-Install the following packages:
+Install the following packages: (You may run `pip install -r requirements.txt` instead of running each installation individually)
 
 For enabling AWS Bedrock features
 `pip install -U opensearch-py==2.3.1`
