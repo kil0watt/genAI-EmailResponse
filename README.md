@@ -1,6 +1,7 @@
 # genAI-EmailResponse
 
 Install the following packages:
+
 `pip install streamlit ` 
 
 `pip install hugchat `
