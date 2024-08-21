@@ -2,6 +2,8 @@ import streamlit as st
 from hugchat import hugchat
 from hugchat.login import Login
 
+from hackathon_code_api import ask_bedrock_llm_with_knowledge_base, getResponse
+
 # App title
 st.set_page_config(page_title="Email Assistant")
 
@@ -19,10 +21,8 @@ for message in st.session_state.messages:
 
 
 # Function for generating LLM response
-def generate_response(prompt_input):
-    # Create ChatBot
-    chatbot = hugchat.ChatBot()
-    return chatbot.chat(prompt_input)
+def generate_response(prompt_input: str):
+    return getResponse(prompt_input)
 
 
 # User-provided prompt
