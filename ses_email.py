@@ -254,7 +254,7 @@ def send_customer_query_reply(email_from, email_to, content):
         ses_mail_sender.send_email(
             email_from,
             SesDestination([email]),
-            "Amazon SES demo",
+            "Reply to your Support Query",
             test_message_text,
             test_message_html,
         )
