@@ -247,8 +247,8 @@ def send_customer_query_reply(email_from, email_to, content):
                 )
 
     if verified:
-        test_message_text = "Hi Customer, " + content + "Regards, Customer Support Team"
-        test_message_html = "Hi Customer, <br /><p>" + content + "</p> Regards,<br /> Customer Support Team"
+        test_message_text = content
+        test_message_html = content
 
         print(f"Sending mail from {email_from} to {email}.")
         ses_mail_sender.send_email(

@@ -2,6 +2,7 @@ import random
 import pprint
 import logging
 import boto3
+from botocore.client import Config
 
 logger = logging.getLogger(__name__)
 
@@ -13,9 +14,15 @@ suffix = random.randrange(200, 900)
 sts_client = boto3.client('sts')
 boto3_session = boto3.session.Session()
 region_name = boto3_session.region_name
+bedrock_config = Config(connect_timeout=120, read_timeout=120, retries={'max_attempts': 0})
 bedrock_agent_client = boto3_session.client('bedrock-agent', region_name=region_name)
+bedrock_agent_client2 = boto3.client("bedrock-agent-runtime", config=bedrock_config)
 pp = pprint.PrettyPrinter(indent=2)
-print(region_name)
+#print(region_name)
+
+bedrock_client = boto3.client('bedrock-runtime')
+
+boto3_session = boto3.session.Session()
 
 # Using RetrieveAndGenerate API
 # try out KB using RetrieveAndGenerate API
@@ -32,6 +39,8 @@ def ask_bedrock_llm_with_knowledge_base(query: str) -> str:
     # Titan Text Embedding v2
     # kb_id = f'UUAULTVL5A'
     # model_arn = f'arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-haiku-20240307-v1:0'
+
+    query = "User prompt: Please write an email with salutation, and closing in the voice of a customer care executive named SupportGenie replying to an airline customer query \n" + query
 
     response = bedrock_agent_runtime_client.retrieve_and_generate(
         input={
@@ -76,10 +85,9 @@ def getResponse(query: str) -> str:
         send_customer_query_reply(email_from, email_to, generated_text)
         return generated_text
 
-# Test code - Not neede
 
 '''
-hcquery = "I'm trying to reset my password, but I'm not receiving the reset email. Can you help?"
+hcquery = "I didn't receive points for my flight on January 29th. Can you help?"
 #getResponse(hcquery)
 
 ses_client = boto3.client("ses")
@@ -89,8 +97,10 @@ email_from = 'genaiibsteam36su@gmail.com'
 
 
 ses_mail_sender = SesMailSender(ses_client)
-content = getResponse(hcquery)
-print("\n CONTENT \n" + content)
-usage_demo2(email_from, content)
+#content = getResponse(hcquery)
+#content = retrieveAndGenerate(hcquery, 'A8R6INXOTV')
+#print("\n CONTENT \n" + content)
+#usage_demo2(email_from, content)
 #ses_mail_sender.send_email(email_from, email_to, 'Reply to your Query', getResponse(hcquery), '', 'genaiibsteam36sug@mail.com')
+#ses_mail_sender.send_email(email_from, email_to, 'Reply to your Query', retrieveAndGenerate(hcquery, 'A8R6INXOTV'), '', 'genaiibsteam36sug@mail.com')
 '''
