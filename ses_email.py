@@ -260,7 +260,6 @@ def send_customer_query_reply(email_from, email_to, content):
         )
         input("Mail sent. Check your inbox and press Enter to continue.")
 
-    print("Thanks for watching!")
     print("-" * 88)
 
 
